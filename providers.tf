@@ -30,7 +30,7 @@ resource "datadog_monitor" "slo_monitor_test" {
   }
 }
 resource "datadog_monitor" "cpu_high" {
-  name  = "tested_terraform_cloud"
+  name  = "tested_terraform_cloud2"
   type  = "metric alert"
   query = "avg(last_5m):avg:system.cpu.user{env:prod} by {host} > 80"
 
