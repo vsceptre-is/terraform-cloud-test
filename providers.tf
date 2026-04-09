@@ -1,28 +1,43 @@
 terraform {
   required_providers {
-    helm = {
-      source  = "hashicorp/helm"
-      version = "~> 2.0"
-    }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "~> 2.0"
+    datadog = {
+      source  = "Datadog/datadog"
     }
   }
 }
-
-provider "kubernetes" {
-  config_path    = "~/.kube/config"
-  config_context = "my-context"
-host = var.host
-
-  client_certificate     = base64decode(var.client_certificate)
-  client_key             = base64decode(var.client_key)
-  cluster_ca_certificate = base64decode(var.cluster_ca_certificate)
+provider "datadog" {
+  api_key = var.DATADOG_API_KEY
+  app_key = var.DATADOG_APP_KEY
 }
 
-provider "helm" {
-  kubernetes {
-    config_path = "~/.kube/config"  # Or use cluster auth
+variable "DATADOG_API_KEY" {
+  type      = string
+  sensitive = true
+}
+
+variable "DATADOG_APP_KEY" {
+  type      = string
+  sensitive = true
+}
+
+resource "datadog_monitor" "slo_monitor_test" {
+  message="Test SLO monitor3"
+  query="error_budget(\"4e3466931bdb53839183e40ff16f3260\").over(\"7d\") > 90"
+  name="Test SLO monitor3322"
+  type="slo alert"
+  monitor_thresholds  {
+    critical = 90
+  }
+}
+resource "datadog_monitor" "cpu_high" {
+  name  = "tested_terraform_cloud"
+  type  = "metric alert"
+  query = "avg(last_5m):avg:system.cpu.user{env:prod} by {host} > 80"
+
+  message = "High CPU in prod."
+
+  monitor_thresholds {
+    critical = 80
+    warning  = 70
   }
 }
