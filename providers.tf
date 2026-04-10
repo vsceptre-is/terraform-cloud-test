@@ -56,3 +56,8 @@ resource "datadog_team" "terraform_test"{
 resource "datadog_user" "myself"{
   email = "ivanseit@vsceptre.com"
 }
+resource "datadog_team_membership" "foo" {
+  team_id = datadog_team.terraform_test.id
+  user_id = datadog_user.myself.id
+  role    = "admin"
+}
