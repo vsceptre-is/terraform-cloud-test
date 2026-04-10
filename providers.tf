@@ -30,7 +30,7 @@ variable "DATADOG_APP_KEY" {
 resource "datadog_monitor" "slo_monitor_test" {
   message="Test SLO monitor3"
   query="error_budget(\"4e3466931bdb53839183e40ff16f3260\").over(\"7d\") > 90"
-  name="Test SLO monitor33"
+  name="Test SLO monitor3"
   type="slo alert"
   monitor_thresholds  {
     critical = 90
