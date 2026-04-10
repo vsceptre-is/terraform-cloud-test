@@ -5,9 +5,9 @@ terraform {
     }
   }
   cloud  {
-    organization = "test_organization_vsceptre"
+    organization = "test_migration_organization"
     workspaces {
-      name = "terraform-cloud-test2" # Mutually exclusive with `tags`
+      name = "terraform-migration-test" # Mutually exclusive with `tags`
     }            
   }
 }
@@ -52,4 +52,12 @@ resource "datadog_team" "terraform_test"{
   description = "This is created using terraform"
   handle      = "terraform-team"
   name        = "terraform Team"
+}
+resource "datadog_user" "myself"{
+  email = "ivanseit@vsceptre.com"
+}
+resource "datadog_team_membership" "foo" {
+  team_id = datadog_team.terraform_test.id
+  user_id = datadog_user.myself.id
+  role    = "admin"
 }
