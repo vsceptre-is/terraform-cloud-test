@@ -5,9 +5,9 @@ terraform {
     }
   }
   cloud  {
-    organization = "test_migration_organization"
+    organization = "test_organization_vsceptre"
     workspaces {
-      name = "terraform-migration-test" # Mutually exclusive with `tags`
+      name = "terraform-cloud-test2" # Mutually exclusive with `tags`
     }            
   }
 }
@@ -47,4 +47,9 @@ resource "datadog_monitor" "cpu_high" {
     critical = 80
     warning  = 70
   }
+}
+resource "datadog_team" "terraform_test"{
+  description = "This is created using terraform"
+  handle      = "terraform-team"
+  name        = "terraform Team"
 }
