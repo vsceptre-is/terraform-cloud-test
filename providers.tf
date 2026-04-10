@@ -51,7 +51,7 @@ resource "datadog_monitor" "cpu_high" {
 resource "datadog_team" "terraform_test"{
   description = "This is created using terraform"
   handle      = "terraform-team"
-  name        = "terraform Team"
+  name        = "terraform Team Test"
 }
 resource "datadog_user" "myself"{
   email = "ivanseit@vsceptre.com"
