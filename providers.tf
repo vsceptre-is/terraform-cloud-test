@@ -32,3 +32,6 @@ resource "datadog_team" "terraform_test"{
   handle      = "terraform-team"
   name        = "terraform Team Test"
 }
+locals {
+  json_data = jsondecode(file("./sample.json"))
+}
