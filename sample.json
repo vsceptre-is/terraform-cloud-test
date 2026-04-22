@@ -3,7 +3,7 @@
     "critical": 10,
     "message": "Total Pods Change\nThis is from terraform",
     "name": "Total Pods Change",
-    "query": "pct_change(sum(last_5m),last_5m):sum:kubernetes_state.pod.ready{kube_deployment:* ,kube_cluster_name:cluster-85 ,host:*} >= 10",
+    "query": "pct_change(avg(last_5m),last_5m):sum:kubernetes_state.pod.ready{kube_deployment:* ,kube_cluster_name:cluster-85 ,host:*} >= 10",
     "type": "query alert",
     "warning": null
   }
