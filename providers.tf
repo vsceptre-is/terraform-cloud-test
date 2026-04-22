@@ -26,3 +26,9 @@ variable "DATADOG_APP_KEY" {
   type      = string
   sensitive = true
 }
+
+resource "datadog_team" "terraform_test"{
+  description = "This is created using terraform"
+  handle      = "terraform-team"
+  name        = "terraform Team Test"
+}
