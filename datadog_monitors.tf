@@ -2,7 +2,7 @@ resource "datadog_monitor" "loop_monitors"{
   for_each = {for monitor in local.json_data : monitor.name => monitor}
   name = each.value.name
   type = each.value.type
-  query = each.value.query
+  query = "${each.value.query} >= ${each.value.critical}"
 
   message = each.value.message
 
